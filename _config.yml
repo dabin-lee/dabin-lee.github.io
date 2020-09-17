@@ -1,12 +1,12 @@
-title: jekyll-rtd-theme
+title: dabini repository
 lang: en
-description: GitHub-flavored docs theme for Jekyll
+description: GitHub private dabin Note
 
 theme: null
 
 nav_version: true
 edit: true
-addons_branch: true
+addons_branch: false
 
 addons:
   - github
@@ -39,3 +39,5 @@ exclude:
   - package.json
   - package-lock.json
   - jekyll-rtd-theme.gemspec
+
+remote_theme: rundocs/jekyll-rtd-theme
