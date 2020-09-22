@@ -3,13 +3,14 @@ sort: 6
 images:
   - title: spa-01 적응형
     link: https://dabin-lee.github.io/spa-01/index.html
-    image: https://dabin-lee.github.io/spa-01/index.html
+    image: #https://dabin-lee.github.io/spa-01/index.html
+    image : (../images/accesskey.png)
   - title: spa-responsive 반응형
     link: https://dabin-lee.github.io/spa-responsive/index.html
-    image: https://dabin-lee.github.io/spa-responsive/index.html
+    image: #https://dabin-lee.github.io/spa-01/index.html
   - title: Github page 반응형
     link: https://dabin-lee.github.io/github-responsive/index.html
-    image: https://dabin-lee.github.io/github-responsive/index.html
+    image: #https://dabin-lee.github.io/spa-01/index.html
   - title: 마크업 연습
     link: https://via.placeholder.com/200/6ab0de/fff.png
     image: https://via.placeholder.com/200/6ab0de/fff.png
