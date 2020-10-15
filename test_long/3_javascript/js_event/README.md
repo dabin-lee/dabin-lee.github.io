@@ -1,3 +1,3 @@
-# I'm folder1
+# JS_Events
 
 source: `{{ page.path }}`

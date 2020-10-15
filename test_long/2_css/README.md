@@ -1,7 +1,4 @@
 # 2. CSS
----
-sort: 2
-
 
 #### CSS_Convention
 

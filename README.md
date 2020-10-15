@@ -1,11 +1,13 @@
-# jekyll-rtd-theme
-[![](https://github.com/rundocs/jekyll-rtd-theme/workflows/CI/badge.svg)][repository]
-[![](https://img.shields.io/gem/v/jekyll-rtd-theme)][rubygem]
-[![](https://img.shields.io/gem/dt/jekyll-rtd-theme)][rubygem]
-[![](https://data.jsdelivr.com/v1/package/gh/rundocs/jekyll-rtd-theme/badge)][cdn]
+# DABINI BLOG
+[![](https://github.com/rundocs/jekyll-rtd-theme/workflows/CI/badge.svg)][html]
+[![](https://img.shields.io/gem/v/jekyll-rtd-theme)][css]
+[![](https://img.shields.io/gem/dt/jekyll-rtd-theme)][jquery]
+[![](https://data.jsdelivr.com/v1/package/gh/rundocs/jekyll-rtd-theme/badge)][javascript]
+<!--
 [![](https://www.codefactor.io/repository/github/rundocs/jekyll-rtd-theme/badge)][codefactor]
 [![](https://img.shields.io/badge/featured%20on-JekyllThemes-red.svg)](https://jekyll-themes.com)
 [![](https://badges.gitter.im/rundocs/jekyll-rtd-theme.svg)][gitter]
+-->
 
 GitHub-flavored docs theme for Jekyll, based on sphinx_rtd_theme
 
@@ -36,8 +38,8 @@ For full documentation, please refer to our website ([rundocs.io](https://rundoc
 ## The license
 The theme is available as open source under the terms of the MIT License
 
-[repository]: https://github.com/rundocs/jekyll-rtd-theme
-[rubygem]: https://rubygems.org/gems/jekyll-rtd-theme
-[cdn]: https://cdn.jsdelivr.net/gh/rundocs/jekyll-rtd-theme/
-[codefactor]: https://www.codefactor.io/repository/github/rundocs/jekyll-rtd-theme
-[gitter]: https://gitter.im/rundocs/jekyll-rtd-theme?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[html]: /test_long/1_html/HTML_design/
+[css]: /test_long/2_css/css_convention.html
+[jquery]: https://cdn.jsdelivr.net/gh/rundocs/jekyll-rtd-theme/
+[javascript]: /test_long/3_javascript/learningJS.html
+<!-- [gitter]: https://gitter.im/rundocs/jekyll-rtd-theme?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge -->

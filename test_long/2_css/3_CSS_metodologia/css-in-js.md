@@ -71,12 +71,12 @@ sort: 4
 
 ## css-in-js 라이브러리 종류
 
-| Styled Components | ![Styled Components](./img/Styled_Components.png) |
-|-------------------|---------------------------------------------------|
-| JSS-React         | ![Styled Components](./img/jss.png)               |
-| glamorous         | ![Styled Components](./img/glamorous.png)         |
-| Radium            | ![Styled Components](./img/radium.png)            |
-| Stylotron         | ![Styled Components](./img/styletron.png)         |
+| Styled Components | ![Styled Components](/assets//Styled_Components.png) |
+|-------------------|---------------------------------------------------    |
+| JSS-React         | ![Styled Components](././assets//jss.png)               |
+| glamorous         | ![Styled Components](/assets//glamorous.png)         |
+| Radium            | ![Styled Components](/assets//radium.png)            |
+| Stylotron         | ![Styled Components](/assets//styletron.png)         |
 
 - Radium
     - (inline style 방식, React에서 사용합니다.)

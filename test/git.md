@@ -280,3 +280,16 @@ $git push origin +`<branch_name>` : 스택에 있는 stash 목록 확인
   $git commit -m "git ignore add"
   $git push
   ```
+
+
+### 16. gitarchive
+- 폴더를 압축하고 .git 하위 폴더를 제외시키는 방법
+
+```
+$ git archive -o 프로젝트.zip HEAD : Git에 저장된 프로젝트를 압축하려는 경우 git archive명령을 사용
+$ git archive -o test.zip HEAD $(git diff --name-only HEAD^) : 최종 커밋 내용 zip 파일로 압축
+```
+
+```
+git archive --format
+```
