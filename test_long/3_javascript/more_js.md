@@ -8,7 +8,8 @@ sort: 3
 - [출처](https://sanghaklee.tistory.com/3?category=610728)
 - js에서 어떤 값이 비어있는지 체크하기 위해서 null checking 방법을 사용한다.
 
-```비 추천
+```javascript
+// 비추천
 var value2 = ""
 if( value2 == ""){
     console.log("비어 있음");
@@ -16,8 +17,7 @@ if( value2 == ""){
         console.log("값이 있음");
     }
 ```
-▼
-[OR연산을 사용한 빈 값 체크]
+▼ OR연산을 사용한 빈 값 체크
 ```javascript
 var value2 = ""
 if( !value2 ){
@@ -27,7 +27,7 @@ if( !value2 ){
     }
 ```
 
-[if 조건식에 true로 반한되는 값이 없기에 else문 실행]
+*[if 조건식에 true로 반한되는 값이 없기에 else문 실행]*
 ```javascript
 if('' || null || undefined || 0 || NaN){
    // ...
@@ -35,12 +35,11 @@ if('' || null || undefined || 0 || NaN){
     console.log('그 외 여기서 실행');
 }
 ```
-
 - 하지만, 어떤 값이 들어올지 모르는 상황에서 빈값이 생기는 경우는 단순히 빈문자열( ' ' ), null 값, 정의되지 않은 값(undefined) 말고 `빈 배열( [] ), 빈 객체( {} )` 가 있을 수 있다.
 - `그리고 중요한 0, 0은 실제로 비어있지 않은 특정값 0을 의미 할수도 있지만 이경우엔 false를 반환한다.`
 
 
-[어떤 값이 자료형에 상관없이 빈 값인지 알고 싶을 때]
+*[어떤 값이 자료형에 상관없이 빈 값인지 알고 싶을 때]*
 <script src="https://gist.github.com/dabin-lee/dccb27d5be34d693fdf032be2ca93d0d.js"></script>
 
 
@@ -217,15 +216,23 @@ zero['lastName']; // 'Cho'
 
 > #### 1) 리터럴 객체
 > - 가장 일반적인 방법 {}(중괄호)를 사용하여 객체를 생성
-> - person은 name, email, birth 프로퍼티를 갖는 객체
 > - 프로퍼티의 값으로는 함수가 올 수도 있고, 배열, 객체 등 자유롭게 올 수 있다.
+> - 객체 리터럴 안에 어떠한 프로퍼티도 작성하지 않으면 빈 객체가 생성된다.
+> - 변수에 대입된 객체 안의 프로퍼티 값을 읽거나 쓸 때는 마침표(.) 또는 대괄호([])를 사용
+> ```
+> card.suit // 하트
+> card["rank"] // a
+> ```
+
 > ```
 > var person = {
 >     name: "victolee",
 >     email: "asdf@example.com",
 >     birth: "0225"
 > }
+> person은 name, email, birth 프로퍼티를 갖는 객체
 > ```
+
 
 > #### 2) Object() 생성자 함수
 > - new 키워드를 이용하여 Object 생성자 함수를 호출하면 비어있는 객체를 얻을 수 있다.
@@ -245,7 +252,6 @@ zero['lastName']; // 'Cho'
 > console.log(person.birth)
 > ```
 
-> #### 3) 생성자 함수
 
 ```tip
 new 연산자로 호출 된 해당 함수는 생성자 함수로 동작한다.
@@ -274,7 +280,37 @@ new 연산자로 호출 된 해당 함수는 생성자 함수로 동작한다.
 
 ![objcet](./../../assets/img/object.png)
 
-> #### 4)
+> #### 4) 리터럴객체와 생성자함수 비교
+
+-`new Object ()`와 객체 리터럴 표기법의 차이점
+```javascript
+var foo = {
+    name: 'foo',
+    age: 35,
+    gender: 'man'
+};
+console.dir(foo);
+
+function Person(name, age, gender, position){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+
+var bar = new Person('bar', 33, 'woman');
+console.dir(bar);
+
+var baz = new Person('baz', 25, 'woman');
+console.dir(baz);
+```
+
+1. 포로토타입 객체(proto property)의 차이점을 갖고 있다.
+    - 객체 리터럴 방식의 경우는 자신의 프로토타입 객체가 object이다.
+    - 생성자 함수의 경우는 new Person 로서 다르다.
+2. js의 객체 생성 규칙 :  자바스크립트 객체는 자신을 생성한 생성자 함수의 prototype 프로퍼티가 가리키는 객체를 자신의 프로토타입 객체로 설정한다.
+    - 객체 리터럴 방식에서는 객체 생성자 함수는 Object() 이고,
+    - 생성자 함수 방식의 경우는 생성자 함수 자체이다.
+
 
 
 
@@ -501,3 +537,7 @@ console.log(ellie.age);
 
 - 생성자(constructor)를 이용해서 object를 만들 때 필요한 데이터 전달
 - 새로운 오브젝트를 만들때는 new라는 키워드를 쓴다.
+
+## 5. js에 나오는 모든 `this`
+
+### 화살표 함수에서 this

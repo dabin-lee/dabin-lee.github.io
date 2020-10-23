@@ -503,10 +503,26 @@ console.log(n);
 js에서는 불리언 아닌 값을 불리언 값으로 바꾸는 방법에 익숙해져야 한다.
 ```
 
+```js
+false && "dog"
+// ↪ false
+
+0 && "dog"
+// ↪ 0
+```
+- 첫 번째 객체가 거짓 같은 값이라면, 해당 객체를 반환합니다.
+
+
+
 **[참 같은 값(Truethy)과 거짓 같은 값(Falsy)]**
-- boolean타입 외에도 조건문이나 반복문 등 boolean값이 필요한 곳에서
-- true와 false로 형 변한되어 반환하는데 이를 참 같은 값과 거짓 같은 값이라고 부른다.
-- 거짓 같은 값 이외의 값은 모두 참 같은 값이다.
+```
+거짓 같은 값(Falsy, falsey로 쓰이기도 함) 값은 불리언 `문맥에서 false로 평가되는 값`입니다.
+참 같은 값(Truthy)인 값이란 불리언을 기대하는 문맥에서 `true로 평가되는 값`입니다. (따로 거짓 같은 값으로 정의된 값이 아니면 모두 참 같은 값으로 평가됩니다.)
+```
+   - boolean타입 외에도 조건문이나 반복문 등 boolean값이 필요한 곳에서
+   - true와 false로 형 변한되어 반환하는데 이를 참 같은 값과 거짓 같은 값이라고 부른다.
+   - 거짓 같은 값 이외의 값은 모두 참 같은 값이다.
+
 
 ```javascript
 function isBlank(value){
@@ -2130,42 +2146,355 @@ console.log(sum);
   - array는  현재 처리하고 있는 배열 자신을 의미한다. (numbers)
 
 
-## 7. OOP - Class
-> [클래스 정의]
-> > 함수와 마찬가지로 클래스 선언( class declarations )와 클래스 표현식( class expresstions )로 만들 수 있다.
-> class 메소드는 class의 {} 안에 정의해야 하고, strict mode로 실행된다.
+## 7. 객체지향프로그래밍 (OOP)
 
-
-
-class :
-constructor : 생성자(파라미터){}
-
-
-
-
-class Dog extends Animal {} : extends키워드는 특정 클래스를 상속받는다는 의미
-
-
-
-[클래스는 함수다]
--
-
-this : this키워드는 의도한 목적, 메서드를 호출한 인스턴스를 가리키는 목적
-
-### 클래스 선언( class declarations )
-### 클래스 표현식( class expresstions )
-
-
-## 9. prototype
-
-자바스크립트에는 클래스라는 개념이 없거든요. 대신 프로토타입(Prototype)이라는 것이 존재합니다. 자바스크립트가 프로토타입 기반 언어라고 불리는 이유이죠.
-클래스가 없으니 기본적으로 상속기능도 없습니다. 그래서 보통 프로토타입을 기반으로 상속을 흉내내도록 구현해 사용합니다.
-
-```note
-최근에는 프로토타입 메서드를 #로 표시하는 표기법이 널리 쓰인다.
-ex) Car.prototype.shift => Car#shift
+### 자바스크립트 생성자(Constructor)함수
+```
+`객체 생성자란?`
+- 함수를 통해서 새로운 객체를 만들고 그 안에 넣고싶은 값 또는 함수를 구현 할 수 있도록 해준다.
+- 객체 생성자 함수를 작성할 때에는 관례상 이름의 첫 문자만을 대문자로 작성한다.
+- 생성자 함수를 가지고 새로운 객체를 만들 때는 new라는 키워드를 사용한다.
+- js에서 생성자 함수가 **class 역할**을 대신 한다.
 ```
 
-모든 함수에는 prototype이라는 특별한 프로퍼티가 있다.
-일반적인 함수에서는 prototype을 사용할 일이 없지만, 객체생성자로 동작하는 함수에는 프로토타입이 대단히 중요하다.
+```javascript
+function Person(name, age, hasjob){
+    this.name = name;
+    this.age = age;
+    this.sayHello = function(){
+        console.log(this.name + ' said "hello"');
+    }
+    this...
+}
+```
+▼  실제 사람 객체를 만들기 : 생성자 함수를 바탕으로 new키워드를 사용해서 호출한다.
+```javascript
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+    this.sayHello = function(){
+        console.log(this.name + ' said "hello"');
+    }
+}
 
+const p1 = new Person('dabin', 30);
+const p2 = new Person('bongsun', 50);
+
+console.log(p1);
+console.log(p2);
+
+p1.sayHello();
+p2.sayHello();
+
+ - p1, p2는 생성자를 바탕으로 2사람을 만들었다.
+ - 그리고 이 객체들은 공통적으로 `sayHello`라는 메소드를 갖고 있다.
+```
+1. Person의 매개변수들을 this에 저장한다. (this는 바로 생성자 함수 자신을 가리킨다.)
+2. 이렇게 this에 저장된 것들은 new를 통해서 객체를 만들 때 적용 된다.
+
+
+### 프로토타입(prototype)
+```
+`프로토타입이란?`
+- prototype 객체는 사전 그대로 원형을 뜻한다. 본래의 모습
+- 같은 생성자로부터 만들어진 객체들은 모두 같은 원형 객체를 공유한다.
+- ex) Persono의 prototype객체에 sayHello라는 메소드를 넣으면 Person 생성자로 만든 모든 객체는 이 메소드 사용 가능
+- prototype은 모든 객체가 공유하고 있어서 한 번만 만들어 진다. (<-> this는 객체 하나를 만들때 메소드도 발생하기에 메모리 낭비)
+- 객체 생성자 함수에서 바깥으로 꺼내서 재사용 하도록 한다.
+```
+
+```
+생성자함수명.prototype.[원하는키] = 코드
+```
+- 모든 함수에는 prototype이라는 특별한 프로퍼티가 있다.
+- 일반 함수에서는 사용할 일이 없지만, 객체 생성자로 동작하는 함수에서는 프로토타입이 중요하다.
+  - new 키워드로 새 인스턴스를 만들었을때 새 객체는 prototype 프로토타입에 접근할 수 있다.
+  - 객체 인스턴스는 생성자의 prototype 프로퍼티를 `__proto__`프로퍼티에 저장한다.
+
+[생성자함수와 prototype]
+
+```
+function Person(){
+	this.hand = 2;
+	this.body = 1;
+	this.nose = 1;
+}
+
+var kim = new Person();
+var lee = new Person();
+console.log(kim.hand); // 2
+console.log(lee.hand); // 2
+```
+▼ prototype을 사용해서 [객체 생성자 상속받기]
+```
+function Person(name, gender) {
+    this.name = name;
+    this.gender = gender;
+}
+Person.prototype.sayHello = function() {
+    alert(this.name + ' said "hello"');
+};
+
+const p3 = new Person('dabin', 30);
+console.log(p3);
+
+function Animal(type, name, sound){
+    this.type = type;
+    this.name = name;
+    this.sound = sound;
+}
+
+Animal.prototype.sayHello = function(){
+    console.log(this.sound);
+}
+
+const dog = new Animal('개', '고양이', '멍멍');
+const cat = new Animal('고양이', '야옹이', '야옹');
+```
+- *클래스의 인스턴스는 모두 같은 프로토타입을 공유한다.*
+- prototype에 메서드가 있다면 해당 클래스의 인스턴스 모두 프로퍼티나 메서드 접근 가능하다.
+  - Person.prototype이라는 어떤 Object의 hand라는 속성을 공유하고 있다.
+  - 위의 코드 처럼 생성된 객체의 수 만큼 변수가 저장되는 것이 아니라, 같은 생성자를 통해서 만들어진 객체들은 하나의 prototype 이라는 Object를 공유하고 있다는 뜻
+
+
+
+[Prototype Link]
+- 기본적으로 Constructor(생성자)가 부여된다.
+- new를 통해 객체를 생성하고, Prototype Object가 생성되서 이 Object와 함수가 가지고 있는 prototype 속성과 연결이 된다.
+- kim은 __proto__ 라는 것을 가지고 있다. 자신을 생성 했던 함수가 가지고 있는 속성 즉, 자신의 부모의 속성들을 물려받은 것이다.
+  - kim.hand 라는 의미는 부모인 Person.prototype이 가르키고 있는 Prototype Object의 속성 중 hand라는 속성을 가르킨다.
+
+
+
+### Class
+[참조 : 버미노트블로그](https://beomy.tistory.com/15?category=591557)
+- 객체 생성자로 구현했던 코드를 조금 더 명확하고, 깔끔하게 구현 할 수 있게 해준다.
+- 추가적으로, 상속도 훨씬 쉽게 해줄 수 있다.
+- 함수와 마찬가지로 클래스 선언( class declarations )와 클래스 표현식( class expresstions )로 만들 수 있다.
+- class 함수선언, 표현은 [Hoisting](https://beomy.tistory.com/7)이 되지 않는다.
+- class 메소드는 class의 {} 안에 정의해야 하고, [strict mode](https://beomy.tistory.com/13)로 실행된다.
+
+
+```js
+class Animal {
+    constructor(type, name, sound) {
+      this.type = type;
+      this.name = name;
+      this.sound = sound;
+    }
+      say() {
+        console.log(this.sound);
+      }
+    }
+
+  class Dog extends Animal {
+    constructor(name, sound) {
+      super('개', name, sound);
+    }
+  }
+
+  class Cat extends Animal {
+    constructor(name, sound) {
+      super('고양이', name, sound);
+    }
+  }
+
+  const dog = new Dog('멍멍이', '멍멍');
+  const dog2 = new Dog('왈왈이', '왈왈');
+  const cat = new Cat('야옹이', '야옹');
+  const cat2 = new Cat('냐옹이', '냐옹');
+
+  dog.say();
+  dog2.say();
+  cat.say();
+  cat2.say();
+
+  console.log(dog);
+  console.log(dog2);
+  console.log(cat);
+  console.log(cat2);
+
+  // 멍멍
+  // 왈왈
+  // 야옹
+  // 냐옹
+  // Dog { type: '개', name: '멍멍이', sound: '멍멍' }
+  // Dog { type: '개', name: '왈왈이', sound: '왈왈' }
+  // Cat { type: '고양이', name: '야옹이', sound: '야옹' }
+  // Cat { type: '고양이', name: '냐옹이', sound: '냐옹' }
+```
+- [extends] 특정 class를 상속 받는다는 의미
+- [constructor] : 객체 생성자의 역할을 하고, 파라미터를 받아온다.
+  - class 내부의 함수는 `메서드` 라고 부른다.
+  - `메서드를 만들면 자동으로 prototype으로 등록이 된다.`
+- [super()] : constructor에서 사용하는 super()함수
+    - 함수가 상속받은 클래스의 생성자(constructor)를 가르킨다. (서브(자식) 클래스에서 상위 클래스를 호출할 때 사용)
+
+
+
+#### 클래스 선언( class declarations )
+```
+class foodRestaurant{
+    constructor (name){
+        this.name = name;
+        this.brands = [];
+    }
+    addBrand(brand){
+        this.brands.push(brand)
+    }
+    print(){
+        console.log(`${this.name}을 파는 음식점들;`),
+        console.log(this.brands.join(', '));
+    }
+}
+
+const chicken = new foodRestaurant();
+const pizza = new foodRestaurant();
+
+pizza.addBrand('도미노피자');
+chicken.addBrand('bbq');
+
+console.log(pizza);
+console.log(chicken);
+```
+
+- Class키워드와 함께 클래스의 이름을 선언
+- 호이스팅이 되지 않는다.
+- 클래스를 선언 한 후 객체를 생성할 수 있다.
+
+
+#### 클래스 표현식( class expresstions )
+```
+// 클래스 이름이 없는 표현식
+var Student = class {
+  constructor(string, num){
+    this.name = stirng;
+    this.age = num;
+  }
+};
+```
+
+
+
+### 객체 프로퍼티 나열
+
+## 8. map과 set
+- **값들을 매핑하기 위한 새로운 데이터 구조**
+  - map : 키와 값을 연결하는 객체와 비슷하다.
+  - set : 중복을 허용하지 않는다는 점만 제외하면 배열과 비슷
+  - 특정 상황에서 유용하도록 메소드가 추가된 거라고 생각
+
+[키와 값을 연결하기 위해선 객체를 사용할 때 생기는 단점]
+```
+1. prototype 체인 때문에 의도하지 않은 연결이 생길 수 있다.
+2. object안에 연결된 키와 값이 몇 개나 되는지 쉽게 알아내기가 힘들었다.
+3. key는 반드시 문자열이나 심볼이어야 하므로 객체를 키로 써서 값과 열결할 수 없다.
+4. 객체는 프로퍼티 순서를 전혀 보장하지 않는다.
+```
+
+### Map()
+- `object를 변형한 것`
+- object와 달리 순서가 기억이 된다. (넣은 순서대로 반복)
+- 키가 문자열이 아니어도 된다.(key에 다양한 자료형을 허용) 객체도 가능하다.
+- size를 항상 체크 가능하다.
+- 편리한 메소드가 제공된다.
+
+```javascript
+const map = new Map([['zero', 'ZeroCho']]); //생성자에 배열의 배열을 넘기는 형태로 써도 가능.
+map.set('hero', 'Hero');
+map.get('zero'); // 'ZeroCho'
+map.size; // 2
+map.has('hero'); // true
+map.has('nero'); // false
+map.entries(); // {['zero', 'ZeroCho'], ['hero', 'Hero']}
+map.keys(); // {'zero', 'hero'}
+map.values(); // {'ZeroCho', 'Hero'}
+map.delete('hero');
+map.clear();
+  ```
+- **[Map에서 제공하는 속성과 메소드]**
+  - `set`으로 설정하고, get으로 가져온다.
+  - `get` 으로 역할을 알아본다. (맵에 존재 하지 않으면 undefined)
+  - `has`로 해당 키가 있는지 확인한다.
+  - `delete`로 기존 키를 지울 수 있다.
+  - `clear`로 초기화 할 수 있다.
+  - `forEach`로 내용물 반복할 수 있다.
+  - `size` 로 내용물 크기를 바로 알 수 있다.
+    - object는 직접 확인해야 한다.
+  - `entries` : Map안의 `키:값` 쌍을 돌려준다.
+  - `keys`: key 값만 돌려준다.
+  - `values`: 값만 돌려준다.
+
+```javascript
+let recipeMap = new Map([
+  ['cucumber', 500],
+  ['tomatoes', 350],
+  ['onion',    50]
+]);
+
+// map.keys()
+for (let vegetable of recipeMap.keys()) {
+  alert(vegetable); // cucumber, tomatoes, onion
+}
+
+// map.values()
+for (let amount of recipeMap.values()) {
+  alert(amount); // 500, 350, 50
+}
+
+// map.entries
+for (let entry of recipeMap) { // recipeMap.entries()와 동일
+  alert(entry); // cucumber,500 ...
+}
+
+// Map은 object와 다르게 property 순서를 기억함
+```
+
+### set()
+- `array를 변형한 것`
+- 중복을 허용하지 않는 데이터 집합이다.
+- set[1] 이렇게 값을 하나씩 확인할 수는 없다.
+- 넣어두고 전체를 반복하는 것이다.
+- set에는 키가 없는 값이 저장된다.
+- set의 장점은, 추가하려는 셋이 이미 있는지 확인할 필요가 없다. 이미 있어도 상관없다.
+- **Array와의 차이점**
+  - 중복 불가능
+  - 중간 값 확인 불가능
+  - 편리한 메소드 제공
+
+```javascript
+const roles = new Set(); //set 인스턴스 생성
+console.log(roles.add('User')); //Set(1) { 'User' }
+console.log(roles.add('Admin')); // Set(2) { 'User', 'Admin' }
+console.log(roles.size); //2
+console.log(roles.add('User')); //Set(2) { 'User', 'Admin' }
+console.log(roles.size); //2
+console.log(roles.delete('Admin')); //true
+console.log(roles); //Set(1) { 'User' }
+console.log(roles.delete('Admin'));//false
+```
+- **[set에서 제공하는 속성과 메소드]**
+  - `new Set(iterable)` – iterable object를 전달받으면(대개 배열을 전달받음) 그 안의 값을 복사해 set에 넣어줌.
+  - `set.add(value) `– 값을 추가하고 set 자신을 반환.
+  - `set.delete(value)` – 값을 제거함. 호출 시점에 set의 값이 있어서 제거에 성공하면 true, 아니면 false를 반환.
+  - `set.has(value) `– set 내에 값이 존재하면 true, 아니면 false를 반환
+  - `set.clear()` – set을 비움.
+  - `set.size `– set에 몇 개의 값이 있는지 세어줌.
+
+### Iteration
+[iterable 객체]
+- 반복 가능한 (iterable) 객체는 배열을 일반화한 `객체이다`.
+- 이터러블을 사용하면 어떤 객체에든 `for..of / forEach`반복문을 적용할 수 있다.
+```javascript
+let set = new Set(["oranges", "apples", "bananas"]);
+
+// (1) for..of
+for (let value of set) alert(value);
+
+// (2) forEach
+set.forEach((value, valueAgain, set) => {
+  alert(value);
+})
+```
+
+## 9. 예외와 에러 처리

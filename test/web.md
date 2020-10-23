@@ -280,3 +280,12 @@ PC에서 http://localhost:7036/나머지 경로.../ 접속하면 경로가 나�
   - 기능 분리로 서버 부하 방지
   - 자원 이용의 효율성 및 장애 극복, 배포 및 유지보수의 편의성 을 위해 Web Server와 WAS를 분리
   - https://gmlwjd9405.github.io/2018/10/27/webserver-vs-was.html
+
+## web & it 개발용어
+파싱
+크롤링(crawling) 이해 및 기본, 크롤링(crawling) 이란?
+
+Web상에 존재하는 Contents를 수집하는 작업 (프로그래밍으로 자동화 가능)
+HTML 페이지를 가져와서, HTML/CSS등을 파싱하고, 필요한 데이터만 추출하는 기법
+Open API(Rest API)를 제공하는 서비스에 Open API를 호출해서, 받은 데이터 중 필요한 데이터만 추출하는 기법
+Selenium등 브라우저를 프로그래밍으로 조작해서, 필요한 데이터만 추출하는 기법
