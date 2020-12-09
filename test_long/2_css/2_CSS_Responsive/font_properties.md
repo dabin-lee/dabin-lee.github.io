@@ -20,11 +20,13 @@ sort: 2
 - 절대값
 ## :two: em
 - 해당 태그가 상속받고 있는 크기에 비례하는 상대적인 길이
+
 ```
 <div class="a">
   <p>내 사이즈는?</p>
 </a>
 ```
+
 ```css
 .a {font-size: 12px}
 p {font-size: 1.2em; padding: 1em;}
@@ -76,6 +78,7 @@ font-size외에 padding, margin등 font-size에 비례하는 것은 rem, em을 �
 
 ## :four: %
 - 해당 태그가 상속받고 있는 크기에 비례하는 상대적인 길이 (em과 동일)
+
 ```tip
 반응형 비율 계산 : https://dabin-lee.github.io/test_long/2_css/AWD_RWD.html
 ```

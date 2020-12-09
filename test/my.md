@@ -3,8 +3,6 @@ sort: 6
 ---
 
 # 필기
-
-
 - click 이벤트 키보드로도 가능
   - 탭으로 움직이는건 button이 있어서 포커스가 가지고 거기서 엔터 누르면 click 이벤트가 발생
   - button태그 click 이벤트 대상에 따로 focus를 주지 않아도 되는
@@ -34,3 +32,54 @@ sort: 6
 ### order
 - CSS 속성은 플렉스 또는 그리드 컨테이너 안에서 현재 요소의 배치 순서를 지정합니다. 컨테이너 아이템의 정렬 순서는 오름차순 order 값이고, 같은 값일 경우 소스 코드의 순서대로 정렬됩니다.
   - order 속성은 논리적인 순서나 탭 순서와는 전혀 상관 없이 화면에 보이는 순서에만 영향을 줍니다. 따라서 비시각적 매체에 적용해선 안됩니다.
+
+
+### 모바일 작업
+
+[출처 : 모바일개발] (https://front8062.tistory.com/27)
+
+#### sprite 이미지 bg_size
+[출처 : 블루윤블로그](https://piarey.tistory.com/38)
+- 모바일 작업할때는 모든 크기를 1/2 로 떨구고 마크업을 해야함.
+  1. 이미지스프라이트 기법을 위해 만든 이미지 원본 크기는 2배 그대로 만들고
+  2. css 상에서 background-size 를 1/2 만큼 줄이면 됨.
+     - background-size 라는게 말 그대로... `<img width=""~~ ` 처럼 사이즈 자체를 조정하는거임.
+  - ex) 원본크기의 width 가 100px 이면 background-size:50px; (height : auto)
+  3. 세부적으론 background-position으로 조정
+
+```danger
+[주의점]
+
+이미지 원본 크기는 물론 그 안에 여러 소 이미지들의 크기 전부 짝수로 맞춰야함.
+21px 이런식이면 1/2 하면 10.5px 인데 소숫점 단위는 안먹히므로 그만큼 오차가 발생.
+```
+
+### javascript:void(0);
+
+- #과 javascript:void(0);
+[차이점](https://reiphiel.tistory.com/entry/href-javascript-void-or-hash)
+
+```javascript
+<script>
+    function somehandler() {
+        return false;
+    }
+</script>
+
+<a href="#" onclick="somehandler()">클릭</a>
+```
+
+```javascript
+<a href="#" id="someid">클릭</a>
+
+$("#someid").click(function(e) {
+  //...
+  e.preventDefault();
+});
+```
+- #(hash)
+  - #(hash)는 보통 페이지 내부링크를 목적으로 사용되는데 id를 지정하지 않은 경우에는 해당 페이지의 최상단으로 스크롤된다. 기본동작을 방지하기 위해서는 클릭 이벤트 핸들러에서 `false를 반환`하거나 이벤트의 `preventDefault를 호출`해 주어야 한다.
+
+
+
+### input

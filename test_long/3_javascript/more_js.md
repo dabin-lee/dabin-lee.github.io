@@ -219,18 +219,18 @@ zero['lastName']; // 'Cho'
 > - 프로퍼티의 값으로는 함수가 올 수도 있고, 배열, 객체 등 자유롭게 올 수 있다.
 > - 객체 리터럴 안에 어떠한 프로퍼티도 작성하지 않으면 빈 객체가 생성된다.
 > - 변수에 대입된 객체 안의 프로퍼티 값을 읽거나 쓸 때는 마침표(.) 또는 대괄호([])를 사용
-> ```
+> ```javascript
 > card.suit // 하트
 > card["rank"] // a
 > ```
-
-> ```
+>
+> ```javascript
 > var person = {
 >     name: "victolee",
 >     email: "asdf@example.com",
 >     birth: "0225"
 > }
-> person은 name, email, birth 프로퍼티를 갖는 객체
+> - person은 name, email, birth 프로퍼티를 갖는 객체
 > ```
 
 
@@ -238,7 +238,8 @@ zero['lastName']; // 'Cho'
 > - new 키워드를 이용하여 Object 생성자 함수를 호출하면 비어있는 객체를 얻을 수 있다.
 > - new Object()를 호출하면 비어있는 객체를 생성
 > - 객체 생성직후 person 객체에는 name, email, birth 프로퍼티를 갖고 있지 않으므로, new Object()로 비어있는 객체를 생성했으면 프로퍼티를 추가한다.
-> ```
+>
+> ```javascript
 > var person = new Object();
 > console.log(person.name)
 > console.log(person.email)
@@ -252,16 +253,15 @@ zero['lastName']; // 'Cho'
 > console.log(person.birth)
 > ```
 
-
-```tip
-new 연산자로 호출 된 해당 함수는 생성자 함수로 동작한다.
-함수가 일반적인 함수인지 객체를 만들기 위한 목적의 생성자 함수인지 구분하기 위해, 생성자 함수의 첫 문자는 대문자로 표기하는 것이 관례
-```
-
+> ```tip
+> new 연산자로 호출 된 해당 함수는 생성자 함수로 동작한다.
+> 함수가 일반적인 함수인지 객체를 만들기 위한 목적의 생성자 함수인지 구분하기 위해, 생성자 함수의 첫 문자는 대문자로 표기하는 것이 관례
+> ```
 > - new 키워드를 이용하여 Object 생성자 함수를 호출하면 비어있는 객체를 얻을 수 있다.
 > - 함수명은 보통 대문자로 시작한다.
 > - 함수 내부적으로 새로운 오브젝트가 생성되고 this로(생략) 표기된다. this에 property를 추가하는 형태
-> ```
+>
+> ```javascript
 > function Person(name,email){
 >     this.name = name;
 >     this.email = email;
@@ -274,15 +274,14 @@ new 연산자로 호출 된 해당 함수는 생성자 함수로 동작한다.
 > console.log(person1.name + " " + person1.email + " " + person1.walk);
 > console.log(person2.name + " " + person2.email + " " + person2.walk);
 > ```
+> - 생성자 함수에서 정의한 this는 생성자 함수로 생성된 인스턴스가 된다.
 
-  - 생성자 함수에서 정의한 this는 생성자 함수로 생성된 인스턴스가 된다.
-  -
 
 ![objcet](./../../assets/img/object.png)
 
-> #### 4) 리터럴객체와 생성자함수 비교
+#### 4) 리터럴객체와 생성자함수 비교
+- `new Object ()`와 객체 리터럴 표기법의 차이점
 
--`new Object ()`와 객체 리터럴 표기법의 차이점
 ```javascript
 var foo = {
     name: 'foo',
@@ -538,6 +537,146 @@ console.log(ellie.age);
 - 생성자(constructor)를 이용해서 object를 만들 때 필요한 데이터 전달
 - 새로운 오브젝트를 만들때는 new라는 키워드를 쓴다.
 
-## 5. js에 나오는 모든 `this`
+## 5. js에 나오는 `this`
+- 대부분의 경우 this의 값은 함수를 호출한 방법이 결정한다.
+[!this](https://byseop.netlify.app/js-this/)
+[!this](https://www.zerocho.com/category/JavaScript/post/5b0645cc7e3e36001bf676eb)
 
-### 화살표 함수에서 this
+
+```javascript
+this; //window{}
+```
+- this는 기본적으로 window이다.
+
+- **[this가 window가 아닌경우]**
+- 1. 객체의 메서드
+  - 객체 메서드 a안에 this는 객체를 가리킨다.
+  - 객체 메서드를 호출할 때 this를 내부적으로 바꿔주기 때문
+
+```javascript
+var obj = {
+  a: function() { console.log(this); },
+};
+obj.a(); // obj
+```
+
+- 2. 단, 호출하는 함수가 객체의 메서드인지 그냥 함수인지가 중요
+  - a2는 obj.a를 꺼내온 것이기 때문에 더 이상 obj의 메서드가 아니다.
+
+```javascript
+var a2 = obj.a;
+a2(); // window
+```
+
+- 3. 명시적으로 this를 바꾸는 함수 메서드
+  - `bind, call, apply`를 사용하면 this가 객체를 가리킨다.
+
+```javascript
+var obj2 = { c: 'd' };
+function b() {
+  console.log(this);
+}
+b(); // Window
+b.bind(obj2).call(); // obj2
+b.call(obj2); // obj2
+b.apply(obj2); // obj2
+```
+
+- 4. 생성자 함수도 함수라는 것
+  - `bind, call, apply`를 사용하면 this가 객체를 가리킨다.
+
+```javascript
+var obj2 = { c: 'd' };
+function b() {
+  console.log(this);
+}
+b(); // Window
+b.bind(obj2).call(); // obj2
+b.call(obj2); // obj2
+b.apply(obj2); // obj2
+```
+### 일반함수와 화살표 함수에서 this
+- 일반 함수는 자신이 종속된 객체를 this로 가리키며, 화살표 함수는 자신이 종속된 인스턴스를 가리킨다.
+
+```javascript
+function BlackDog() {
+  this.name = '흰둥이';
+  return {
+    name: '검둥이',
+    bark: function() {
+      console.log(this.name + ': 멍멍!');
+    }
+  }
+}
+
+const blackDog = new Blackdog();
+blackDog.bark(); // 검둥이: 멍멍!
+
+function WhiteDog() {
+  this.name = '흰둥이';
+  return {
+    name: '검둥이',
+    bark: () => {
+      console.log(this.name + ': 멍멍!');
+    }
+  }
+}
+
+const whiteDog = new Whitedog();
+whiteDog.bark(); // 흰둥이: 멍멍!
+```
+#### 화살표 함수 this
+- `화살표함수는 this를 정의하지 않습니다.`
+- 함수의 내부함수, 콜백함수에 사용되는 this는 window입니다.
+- 일반 함수와 화살표 함수의 차이점이 있습니다. 일반함수가 전역 컨텍스트에서 실행될 때 this가 정의합니다.
+
+
+```javascript
+
+// react
+import React from 'react'
+
+class BindTest extends React.Component {
+  handleClick = () => {
+    console.log(this)
+  }
+  render() {
+    return (
+      <button type="button" onClick={this.handleClick}>
+        Goodbye bind
+      </button>
+    )
+  }
+}
+export default BindTest
+```
+- 화살표 함수의 this 는 외부함수(부모함수)의 this 를 상속받기 때문에 this 는 항상 일정하다.
+- 위 예제의 경우에는 BindTest 클래스(사실 함수입니다)가 되는 것이다.
+[출처 : react arrow](https://blueshw.github.io/2017/07/01/arrow-function/)
+
+## 6. null과 undefined
+
+```javascript
+let a;
+console.log(a); //undefined
+let b = null;
+```
+- Javascript 원시타입에는 null과 undefined가 존재한다. 이 둘의 차이점은?
+  - undefined : 변수를 선언하였지만 `아직 값을 할당하지 않았음`을 의미한다.
+  - null : 어떤 변수에 `아무런 값도 나타내지 않겠다 라는 의도`를 가지고 일부러 넣은 값을 의미한다.
+
+
+```javascript
+const fn = (arg = 'dp') => console.log(arg);
+fn(); // dp
+fn(undefined); // dp
+fn(null); // null
+```
+- 만약 함수에서 default parameter가 지정이 되어있는데 인자로 undefined 또는 null을 넘겨준다면?
+  - undefined를 인자로 주었을 땐 dp가 출력
+  - null은 dp가 아닌 null이 그대로 출력
+  - default parameter는 파라미터에 값이 없거나 undefined인 경우에 동작하기 때문에 null을 넘겨주면 null 값이 그대로 들어가게된다.
+
+```danger
+함수를 사용시 인자로 null이 들어갈 가능성이 있다면 default parameter가 동작하지 않을 수 있음을 주의
+```

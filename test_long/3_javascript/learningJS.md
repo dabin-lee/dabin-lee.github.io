@@ -2411,7 +2411,8 @@ map.keys(); // {'zero', 'hero'}
 map.values(); // {'ZeroCho', 'Hero'}
 map.delete('hero');
 map.clear();
-  ```
+```
+
 - **[Map에서 제공하는 속성과 메소드]**
   - `set`으로 설정하고, get으로 가져온다.
   - `get` 으로 역할을 알아본다. (맵에 존재 하지 않으면 undefined)
@@ -2482,9 +2483,10 @@ console.log(roles.delete('Admin'));//false
   - `set.size `– set에 몇 개의 값이 있는지 세어줌.
 
 ### Iteration
-[iterable 객체]
-- 반복 가능한 (iterable) 객체는 배열을 일반화한 `객체이다`.
-- 이터러블을 사용하면 어떤 객체에든 `for..of / forEach`반복문을 적용할 수 있다.
+- [iterable 객체]
+  - 반복 가능한 (iterable) 객체는 배열을 일반화한 `객체이다`.
+  - 이터러블을 사용하면 어떤 객체에든 `for..of / forEach`반복문을 적용할 수 있다.
+
 ```javascript
 let set = new Set(["oranges", "apples", "bananas"]);
 
@@ -2498,3 +2500,18 @@ set.forEach((value, valueAgain, set) => {
 ```
 
 ## 9. 예외와 에러 처리
+
+
+## 10. 이너레이터와 제너레이터
+```
+프로그래밍 언어에서 iterator 란 배열이나 유사한 자료 구조의 내부의 요소를 순회(traversing)하는 객체이다.
+```
+[Iterator]
+- 이터레이터(Iterator) : `지금 어디 있는지` 파악할 수 있도록 돕는 `책갈피` 와 같은 개념.
+  - Iterable: 객체의 맴버를 반복할 수 있는 객체
+  - JS객체가 iterable하기 위해서는, object에 `[@@iterator]`메소드가 구현되어 있어야 한다.
+  - 객체는 반드시 하나의 `Symbol.iterator` 만을 가질수 있다.
+
+[Generator]
+  - 제너레이터는 이터레이터에 의존하는 개념
+  - 제너레이터는 쉽게 말해 Iterator의 반대쪽 (Iterator가 값을 읽어오기 위한 인터페이스라면 Generator는 값을 쓰기 위한 인터페이스란 측면 때문이다.)

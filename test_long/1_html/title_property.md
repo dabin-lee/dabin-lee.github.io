@@ -11,7 +11,6 @@ sort: 2
    - 요소에서 title속성이 생략된다면, 가장 가까운 부모 요소의 title이 적용될 수 있다.
    - 부모 요소와의 무관함을 밝히려면 명시적으로 title속성을 제공해야 한다.
    - 빈 문자열을 설정한다면, title이 조언 정보를 갖고 있음을 나타낸다.
-   - title 속성은
 
 
 ## 스펙에서 정의 된 title속성의 사용 법
@@ -34,10 +33,8 @@ sort: 2
 [이미지 컨텐츠를 표현하는 방법]
 - `**img와 background-image**`
 
-HTML 의 <img /> 태그를 활용하는 방법.
+HTML 의 `<img />` 태그를 활용하는 방법.
 CSS 의 background-image 를 사용하는 방법.
-
-
 ```
 <div class="slide_cont">
   <img src="" alt="slideimg">

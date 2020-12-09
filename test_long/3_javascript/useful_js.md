@@ -94,7 +94,7 @@ console.log(oddArr); // [1, 9]
 ### [spread 연산자]
 - 객체 혹은 배열을 펼칠 수 가 있다.
 
-#### [객체에서 spread 사용!]
+#### 1) 객체에서 spread 사용!
 ```javascript
 
 const slime = {
@@ -122,7 +122,7 @@ console.log(greenCuteSlime); //{ name: '슬라임', attribute: 'cute', color: 'g
 ```
 - point : 기존의 것을 건들이지 않고, 새로운 객체를 만든다는 것
 
-#### [배열에서 spread 연산자를 `여러번` 사용]
+#### 2) 배열에서 spread 연산자를 `여러번` 사용
 ```javascript
 
 const animals = ['고양이', '강아지', '토끼'];
@@ -169,6 +169,7 @@ console.log(cuteSlime);
 #### [배열에서의 rest]
 - 배열 비구조화 할당을 통하여 원하는 값을 밖으로 꺼내고, 나머지 값을 rest 안에 넣는다.
 -  주의! 배열에서 rest는 맨 마지막에 와야 한다.
+
 ```javascript
 const numbers = [0, 1, 2, 3, 4, 5, 6];
 
@@ -178,10 +179,10 @@ console.log(one); //0
 console.log(rest); //[1, 2, 3, 4, 5, 6]
 ```
 
-
 #### [...rest 는 배열이기에 관련 API 사용가능]
 [참조 블로그](https://sheldhe93.tistory.com/13)
-```
+
+```javascript
 function fun(...rest){
   rest.forEach((e) => {
     console.log(e);
@@ -210,7 +211,8 @@ const result = subtract(1, 2)// 파라미터로 쓰여지는 값 : 인자
 ```
 
 [배열 메소드와 함께]
-```
+
+```javascript
 function sum(...rest){
     return rest.reduce((acc, current) => acc + current, 0)
 }
@@ -247,3 +249,71 @@ function bar(x, y, z){
 bar(...[1, 2, 3]);
 ```
 
+
+## 5. Scope
+[SOCPE](https://www.zerocho.com/category/Javascript/post/5740531574288ebc5f2ba97e)
+
+- 1) 전역변수와 지역변수
+  - 전역(global)변수를 만드는 일은 최대한 지양해야한다.
+  - 전역변수란 자바스크립트에서 제일 바깥 범위(함수 안에 포함되지 않은)에 변수를 만드는 것인데, window 객체에 변수를 만드는 것이다.
+  - 지역 변수는 함수 안에 들어있는 변수를 의미한다.
+
+- 2) 스코프(Scope)
+- 정적스코프 (렉시컬 스코핑(lexical scoping))
+- 함수를 처음 선언하는 순간, 함수 내부의 변수는 자기 스코프로부터 가장 가까운 곳(`상위 범위에서`)에 있는 변수를 계속 참조하게 된다.
+
+## 5.Getter Setter 함수
+
+1. 프로퍼티의 종류
+- 데이터 프로퍼티(data property) : 값을 저장하기 위한 프로퍼티. 일반적으로 사용하는 프로퍼티는 데이터 프로퍼티이다.
+- 접근자 프로퍼티(accessor property) : 값이 없음. 프로퍼티를 읽거나 쓸 때 호출하는 함수를 값 대신에 지정할 수 있는 프로퍼티. 접근자 프로퍼티의 본질은 함수인데, 이 함수는 값을 획득(get)하고 설정(set)하는 역할을 담당한다. 그런데 외부 코드에서는 함수가 아닌 일반적인 프로퍼티처럼 보인다.
+
+```
+get – 인수가 없는 함수로, 프로퍼티를 읽을 때 동작함
+set – 인수가 하나인 함수로, 프로퍼티에 값을 쓸 때 호출됨
+```
+- Getter 함수와 Setter 함수를 사용하게 되면 특정 값을 바꾸려고 하거나, 특정 값을 조회하려고 할 때 우리가 원하는 코드를 실행 시킬 수 있다.
+- Getter 함수는 특정 값을 `조회 할 때` 우리가 설정한 함수로 연산된 값을 반환한다.
+
+```javascript
+const numbers = {
+  a: 1,
+  b: 2,
+  get sum() {
+    console.log('sum 함수가 실행됩니다!');
+    return this.a + this.b;
+  }
+};
+
+console.log(numbers.sum); //sum 함수가 실행됩니다. 3
+numbers.b = 5;
+console.log(numbers.sum); //sum 함수가 실행됩니다. 7
+```
+
+
+```javascript
+const dog = {
+    _name : '멍멍이',
+    get name (){
+        console.log('_name을 조회합니다.');
+        return this._name;
+    },
+    set name(value){// parameter를 무조건 설정해줘야 한다.
+        console.log('이름이 바뀝니다 ' + value);
+        this._name = value;
+    }
+};
+
+// 값과 함수의 이름은 똑같을 수 없다.
+// 하지만 get, set함수 이름은 동일할 수 있다.
+
+console.log(dog._name); //멍멍이
+console.log(dog.name); //_name을 조회합니다.
+
+dog.name = '망고';
+console.log(dog.name);
+
+//이름이 바뀝니다 망고
+//_name을 조회합니다.
+//망고
+```

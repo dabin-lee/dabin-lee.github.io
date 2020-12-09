@@ -183,6 +183,10 @@ sort: 2
     - `<button> `요소는 클릭함으로써 이벤트를 발생시키는게 주된 목적
     - 기능을 구현하는 것은 (ex. 팝업창을 띄우거나 어떤 요소를 숨기거나 보이게 하거나 등등) button 요소를 사용
     - 페이지 내 기능 a > button 으로
+    - [ button 속성값 ]
+       - type="submit" : 폼의 전송 기능을 담당한다.
+       - type="reset" : 폼 작성 내용을 초기화하는데 사용한다.
+       - type="button" : 흔히 자바스크립트를 이용한 기능 구현에 많이 사용한다.
 
   - [`<input>`요소]
     - 사용자의 입력을 서버로 '전송' 하기 위한 버튼으로서 `<input type="submit">`, `<button type="submit">` 엘리먼트로 마크업 합니다.
@@ -309,12 +313,27 @@ sort: 2
 - name은 서버전송을 위해 꼭 필요한 필수 값
 - value는 폼 필드에 기본적으로 입력을 해주는 값.
 
+## 7. form
+- input 요소를 특정 페이지로 전송하는 역할
+- form안에는 하나의 submit만 존재
+- 양식과 button이 모두 form 안에 포함되어야 한다.
 
-## 7. label의 관해서
+- input에는 꼭 label이 붙는것인가?
+  - 검색 input 같이 label 없이  input에 title="펀드명 입력"을 추가해 준다.
+  - 기본적인 체크박스, 라디오 버튼인 경우도 별도의 텍스트 없으면 title만 넣어 주면 된다.
+    - [예시](http://www.samsungfund.com/retFundList.action)
+    - [예시](https://osms.skbroadband.com/hub/logon.do?siteCd=SKBB&returnUrl=https%3A%2F%2Fwww.skbroadband.com%2FTidLogin.do%3FUURL%3Dhttps%3A%2F%2Fwww.skbroadband.com%2FMain.do%3F)
+   - 아이디, 비밀번호 이렇게 텍스가 있는 경우는 해당 텍스트들을 label로 연결해준다..
+   - 체크박스나 라디오 버튼을 이미지화 해서 사용할때는 input은 숨기고 label에 이미지 처리 해서 사용한다.
+     - [예시] (http://www.samsungfund.com/retFundList.action)
+
+### 1) label의 관해서
 - label태그?
 - label은 for속성과 id속성을 명시함으로써 연결해주는 방식을 의미한다.
 - 스크린 리더기와 같은 통신 기기가 label태그를 통해 연결된 input 태그를 인식한다.
-- 명시적, 암시적 label
+- 명시적, 암시적 label / 대부분은 명시적으로 id 값을 연결해주는 방식을 사용 한다.
+
+
 
 ```
 // 명시적
@@ -327,11 +346,7 @@ sort: 2
 </label>
 ```
 
-## 8. form
 
-- input 요소를 특정 페이지로 전송하는 역할
-- form안에는 하나의 submit만 존재
-- 양식과 button이 모두 form 안에 포함되어야 한다.
 
 ## 9. dl dt dd
 
@@ -410,4 +425,10 @@ sort: 2
 - 조각난 이미지 파일들을 하나의 파일로 병합 후 배경으로 처리해서 웹 문서 전송 속도를 높이는 기법. <br>
   이 때 의미가 있는 이미지는 전경에 상응하는 텍스트를 포함시켜서 접근성을 확보해야 하기 때문에 IR(Image Replacement) 기법이 함께 사용 된다.
   - 출처: https://freemi99.tistory.com/entry/Tip-IR기법과-IS기법 [꿈을꾸고있는]
-d
+
+
+## SEO
+[읽어보기](https://blueshw.github.io/2020/06/14/seo/)
+- SEO(Search Engine Optimization)
+
+<!-- title / meta tag -->
