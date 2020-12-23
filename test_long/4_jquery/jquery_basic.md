@@ -1,8 +1,8 @@
 ---
-sort: 5
+sort: 1
 ---
 
-# Jquery
+# Jquery Basic
 
 ## 1. stopPropagation, preventDefault, return false 간의 차이점
 

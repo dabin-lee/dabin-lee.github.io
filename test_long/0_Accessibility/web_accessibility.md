@@ -1,5 +1,5 @@
 ---
-sort: 2
+sort: 1
 ---
 
 # 웹 접근성
@@ -346,7 +346,25 @@ sort: 2
 </label>
 ```
 
+### 1) label 텍스트를 placeholder를 이용해 보이도록 스타일적용하는 것
 
+```
+레이블을 제공할 수 없는 경우에 대해서,
+말씀하신 경우와 같은 레이블을 제공후 감추는 방법이 해결책이 될 수 있고,
+input에 title을 제공하는 방법이 해결책이 될 수 있습니다.
+
+placeholder를 제공하는 것은 접근성 있는 입력창을 만드는 것으로는 인정되지 않는데,
+초점 시 내용이 사라지는 것과 화면낭독기에서 읽어 주지 않는 경우 등의 이슈가 있습니다.
+
+숨김 레이블을 제공해주는 경우, display:none, visibility:hidden을 사용하는 것은 적절치 않으며,
+overflow:hidden 기법이 권장되고 있습니다. (센스리더, Jaws, NVDA에서 모두 읽기 가능)
+
+overflow:hidden 포지셔닝 기법은 다음 소스를 참고하기 바랍니다.
+
+(포지셔닝 예)
+.hidden {position：absolute; left:-10000px; top:auto; height:1px; overflow:hidden; }
+.hidden {display: block; width: 0; text-indent: -9000px; overflow: hidden;}
+```
 
 ## 9. dl dt dd
 
